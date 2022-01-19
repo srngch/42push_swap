@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/15 17:13:03 by sarchoi          ###   ########.fr       */
+/*   Updated: 2022/01/19 15:52:02 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,15 @@ t_stack	*make_stack(t_stack *stack, int size, int **data)
 		i++;
 	}
 	return (new_stack);
+}
+
+// init the stack
+// return: the stack, NULL if fail
+t_stack	*init_stack(void)
+{
+	t_stack	*stack;
+	
+	stack->top = NULL;
+	stack->size = 0;
+	return (stack);
 }
