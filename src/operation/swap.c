@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarchoi <sarchoi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:40:47 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/15 17:18:31 by sarchoi          ###   ########.fr       */
+/*   Created: 2022/01/19 15:52:16 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/01/19 16:44:12 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// TODO: swap: sa, sb, ss
-
-int	sa(t_stack *stack)
+int	ps_swap(t_stack *stack)
 {
 	t_list	*tmp;
 
 	if (stack->size < 2)
 		return (FT_FALSE);
 	tmp = stack->top;
-// TODO
+	stack->top = stack->top->next;
+	stack->top->next = tmp;
 	return (FT_TRUE);
 }
 
-// TODO: push: pa, pb
+int	sa(t_ps *ps)
+{
+	if (ps_swap(ps->a))
+		return (FT_TRUE);
+	return (FT_FALSE);
+}
 
-// TODO: rotate: ra, rb, rr
+int	sb(t_ps *ps)
+{
+	if (ps_swap(ps->b))
+		return (FT_TRUE);
+	return (FT_FALSE);
+}
 
-// TODO: reverse: rra, rrb, rrr
+int	ss(t_ps *ps)
+{
+	if (sa(ps) && sb(ps))
+		return (FT_TRUE);
+	return (FT_FALSE);
+}
