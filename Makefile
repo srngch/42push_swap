@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarchoi <sarchoi@student.42.fr>            +#+  +:+       +#+         #
+#    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/15 13:55:37 by sarchoi           #+#    #+#              #
-#    Updated: 2022/01/15 14:23:58 by sarchoi          ###   ########.fr        #
+#    Updated: 2022/01/19 21:34:46 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,14 @@ SRCS = $(wildcard src/*.c)
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft
-LIBFT_FLAGS = -L $(LIBFT) -lft
-INC_FLAGS = -I includes -I $(LIBFT)
+LIBFT_FLAGS = -L libs/$(LIBFT) -lft
 
-SRCS_GNL = libs/get_next_line/get_next_line_utils.c \
-		   libs/get_next_line/get_next_line.c
+GNL = gnl
+SRCS_GNL = libs/$(GNL)/get_next_line_utils.c \
+		   libs/$(GNL)/get_next_line.c
 OBJS_GNL = $(SRCS_GNL:.c=.o)
-GNL = get_next_line
+
+INC_FLAGS = -I includes -I libs/$(LIBFT) -I libs/$(GNL)
 
 green:=$(shell tput setaf 2)
 reset:=$(shell tput sgr0)
@@ -34,10 +35,12 @@ reset:=$(shell tput sgr0)
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
+	@make all --silent --directory=libs/$(LIBFT)
 	@make bonus --silent --directory=libs/$(LIBFT)
 	$(info $(green)<MAKE> Libft - make bonus$(reset))
 
-$(NAME): $(OBJS) $(OBJS_GNL)
+# $(OBJS_GNL)
+$(NAME): $(OBJS) 
 	$(CC) $(CFLAGS) -o $@ $(OBJS_SERVER) $(OBJS) $(LIBFT_FLAGS)
 	$(info $(green)<MAKE> NAME$(reset))
 
@@ -53,7 +56,7 @@ clean:
 
 # TODO: check if gnl is clean
 fclean: clean
-	@make fclean --silent --directory=$(LIBFT)
+	@make fclean --silent --directory=libs/$(LIBFT)
 	$(info $(green)<MAKE> Libft - fclean$(reset))
 	@rm -f $(NAME)
 	$(info $(green)<MAKE> fclean$(reset))
