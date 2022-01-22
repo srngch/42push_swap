@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_macro.h                                         :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:25:30 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 00:45:50 by sarchoi          ###   ########.fr       */
+/*   Created: 2022/01/23 01:18:08 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/01/23 01:36:46 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_MACRO_H
-# define PS_MACRO_H
+#include "push_swap.h"
 
-/*
-** integer min, max
-*/
-# define PS_INT_MIN -2147483648
-# define PS_INT_MAX 2147483647
+static int	ft_isspace(int c)
+{
+	if (c == ' ' || (9 <= c && c <= 13))
+		return (1);
+	return (0);
+}
 
-/*
-** ANSI Color Codes
-*/
-# define RED			"\x1b[31m"
-# define GREEN			"\x1b[32m"
-# define BLUE			"\x1b[34m"
-# define YELLOW			"\x1b[33m"
-# define MAGENTA		"\x1b[35m"
-# define CYAN			"\x1b[36m"
-# define RESET			"\x1b[0m"
+long	ft_atol(const char *str)
+{
+	long	r;
+	int		sign;
 
-#endif
+	r = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		r = r * 10 + (*str - '0');
+		str++;
+	}
+	return (r * sign);
+}

@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/19 21:30:21 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/23 02:26:32 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,42 +71,39 @@ int	stack_push(t_stack *stack, int data)
 // return: 1(TRUE) if stack is empty, 0(FALSE) if not
 int	stack_is_empty(t_stack *stack)
 {
-	return (stack->size == 0);
+	if (!stack->top)
+		return (FT_TRUE);
+	return (FT_FALSE);
 }
-
-// make the stack
-// return: the stack, NULL if fail
-// t_stack	*make_stack(t_stack *stack, int size, int **data)
-// {
-// 	t_stack	*new_stack;
-// 	int		i;
-
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		if (!stack_push(stack, *data[i]))
-// 		{
-// 			// TODO: free stack
-// 			// free_stack(stack);
-// 			return (NULL);
-// 		}
-// 		i++;
-// 	}
-// 	return (new_stack);
-// }
 
 // init the stack
 // return: the stack, NULL if fail
 t_stack	*init_stack(void)
 {
 	t_stack	*stack;
-	
+
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	stack->top = NULL;
 	stack->size = 0;
 	return (stack);
+}
+
+void	free_stack(t_stack *stack)
+{
+	t_list	*item;
+	t_list	*next;
+
+	item = stack->top;
+	while (item)
+	{
+		next = item->next;
+		free(item->content);
+		free(item);
+		item = next;
+	}
+	free(stack);
 }
 
 int	print_stack(t_stack *stack)
