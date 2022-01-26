@@ -6,11 +6,25 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:18:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 02:57:04 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/26 19:32:39 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// WIP
+int	ps_sort(t_ps *ps)
+{
+	if (ps->a->size == 1)
+		return (FT_TRUE);
+	if (ps->a->size == 2)
+		return (ps_sort_2(ps));
+	if (ps->a->size == 3)
+		return (ps_sort_3(ps));
+	else
+		ft_putstr_fd("4 or more elements\n", 1);
+	return (FT_FALSE);
+}
 
 int	main(int argc, char **argv)
 {
@@ -31,6 +45,8 @@ int	main(int argc, char **argv)
 		free_stack(ps.a);
 		return (EXIT_FAILURE);
 	}
+	print_stack(ps.a);
+	ps_sort(&ps);
 	print_stack(ps.a);
 	// TODO: sort the stacks
 	// TODO: print the result
