@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/15 13:55:37 by sarchoi           #+#    #+#              #
-#    Updated: 2022/01/19 21:34:46 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/01/26 19:09:54 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 # TODO: remove wildcard
-SRCS = $(wildcard src/*.c)
+SRCS = $(wildcard src/*.c) $(wildcard src/*/*.c)
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft
@@ -40,7 +40,7 @@ $(LIBFT):
 	$(info $(green)<MAKE> Libft - make bonus$(reset))
 
 # $(OBJS_GNL)
-$(NAME): $(OBJS) 
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS_SERVER) $(OBJS) $(LIBFT_FLAGS)
 	$(info $(green)<MAKE> NAME$(reset))
 
