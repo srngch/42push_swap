@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 02:26:32 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/26 20:17:28 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ t_list	*stack_top(t_stack *stack)
 	if (stack->size == 0)
 		return (NULL);
 	return (stack->top);
+}
+
+t_list	*stack_bottom(t_stack *stack)
+{
+	t_list	*bottom;
+
+	if (stack->size == 0)
+		return (NULL);
+	bottom = stack->top;
+	while (bottom->next)
+		bottom = bottom->next;
+	return (bottom);
 }
 
 // remove the top item of the stack
