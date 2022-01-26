@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:52:16 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/26 18:44:38 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/26 19:30:20 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ps_swap(t_stack *stack)
 		return (FT_FALSE);
 	tmp = stack->top;
 	stack->top = stack->top->next;
+	tmp->next = stack->top->next;
 	stack->top->next = tmp;
 	return (FT_TRUE);
 }
