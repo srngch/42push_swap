@@ -6,15 +6,15 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:10:36 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/19 16:47:15 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/26 18:44:09 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ps_rotate(t_stack *stack)
+int ps_rotate(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	if (!stack->top)
 		return (FT_FALSE);
@@ -30,24 +30,33 @@ int	ps_rotate(t_stack *stack)
 	return (FT_TRUE);
 }
 
-int	ra(t_ps *ps)
+int ra(t_ps *ps)
 {
 	if (ps_rotate(ps->a))
+	{
+		ft_putstr_fd("ra\n", STDIN_FILENO);
 		return (FT_TRUE);
+	}
 	return (FT_FALSE);
 }
 
-int	rb(t_ps *ps)
+int rb(t_ps *ps)
 {
 	if (ps->b->size < 2)
+	{
+		ft_putstr_fd("rb\n", STDIN_FILENO);
 		return (FT_FALSE);
+	}
 	ps_rotate(ps->b);
 	return (FT_TRUE);
 }
 
-int	rr(t_ps *ps)
+int rr(t_ps *ps)
 {
 	if (ra(ps) && rb(ps))
+	{
+		ft_putstr_fd("rr\n", STDIN_FILENO);
 		return (FT_TRUE);
+	}
 	return (FT_FALSE);
 }

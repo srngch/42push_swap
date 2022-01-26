@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:52:16 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/19 16:44:12 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/01/26 18:44:38 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,29 @@ int	ps_swap(t_stack *stack)
 int	sa(t_ps *ps)
 {
 	if (ps_swap(ps->a))
+	{
+		ft_putstr_fd("sa\n", STDIN_FILENO);
 		return (FT_TRUE);
+	}
 	return (FT_FALSE);
 }
 
 int	sb(t_ps *ps)
 {
 	if (ps_swap(ps->b))
+	{
+		ft_putstr_fd("sb\n", STDIN_FILENO);
 		return (FT_TRUE);
+	}
 	return (FT_FALSE);
 }
 
 int	ss(t_ps *ps)
 {
 	if (sa(ps) && sb(ps))
+	{
+		ft_putstr_fd("ss\n", STDIN_FILENO);
 		return (FT_TRUE);
+	}
 	return (FT_FALSE);
 }
