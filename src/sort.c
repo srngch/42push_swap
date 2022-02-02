@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:41:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/26 19:30:57 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/02 21:33:39 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ps_sort_3 (t_ps *ps)
 			max_item = tmp;
 		tmp = tmp->next;
 	}
-	printf("min: %d, max: %d\n", *(int *)min_item->content, *(int *)max_item->content);
+	// printf("min: %d, max: %d\n", *(int *)min_item->content, *(int *)max_item->content);
 	if (stack_top(ps->a) == min_item && stack_bottom(ps->a) == max_item)
 		return (FT_TRUE);
 	if (stack_top(ps->a) == min_item && stack_bottom(ps->a) != max_item)

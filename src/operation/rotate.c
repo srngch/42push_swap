@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:10:36 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/26 18:44:09 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/02 21:39:28 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int ra(t_ps *ps)
 {
 	if (ps_rotate(ps->a))
 	{
-		ft_putstr_fd("ra\n", STDIN_FILENO);
+		ft_putstr_fd("ra\n", STDOUT_FILENO);
 		return (FT_TRUE);
 	}
 	return (FT_FALSE);
@@ -44,7 +44,7 @@ int rb(t_ps *ps)
 {
 	if (ps->b->size < 2)
 	{
-		ft_putstr_fd("rb\n", STDIN_FILENO);
+		ft_putstr_fd("rb\n", STDOUT_FILENO);
 		return (FT_FALSE);
 	}
 	ps_rotate(ps->b);
@@ -55,7 +55,7 @@ int rr(t_ps *ps)
 {
 	if (ra(ps) && rb(ps))
 	{
-		ft_putstr_fd("rr\n", STDIN_FILENO);
+		ft_putstr_fd("rr\n", STDOUT_FILENO);
 		return (FT_TRUE);
 	}
 	return (FT_FALSE);
