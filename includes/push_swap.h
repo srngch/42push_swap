@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:20:47 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/26 19:07:24 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/04 01:21:54 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ int		rra(t_ps *ps);
 int		rrb(t_ps *ps);
 int		rrr(t_ps *ps);
 
+t_list	*find_min_item(t_stack *stack);
+t_list	*find_max_item(t_stack *stack);
+
 int		ps_sort_2 (t_ps *ps);
 int		ps_sort_3 (t_ps *ps);
+int		ps_sort_4 (t_ps *ps);
+int		ps_sort_many (t_ps *ps);
 
 // TEST
 # include <stdio.h>

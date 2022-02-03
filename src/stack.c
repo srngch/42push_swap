@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/26 20:17:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/04 02:30:13 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ int	stack_pop(t_stack *stack)
 		return (0);
 	item = stack->top;
 	data = *(int *)(item->content);
+	if (stack->size == 1)
+	{
+		stack->top = NULL;
+		stack->size = 0;
+		free(item);
+		return (data);
+	}
 	stack->top = item->next;
 	free(item);
 	stack->size--;
@@ -67,14 +74,17 @@ int	stack_push(t_stack *stack, int data)
 		return (0);
 	*new_content = data;
 	item->content = new_content;
-	if (!stack->top)
+	if (stack->size == 0)
 	{
+		item->next = NULL;
 		stack->top = item;
 		stack->size++;
 		return (FT_TRUE);
 	}
+	printf("*stack->top: %d\n", *(int *)(stack->top->content));
 	item->next = stack->top;
 	stack->top = item;
+	printf("	stack->top: %d\n", *(int *)(stack->top->content));
 	stack->size++;
 	return (FT_TRUE);
 }
@@ -122,6 +132,7 @@ int	print_stack(t_stack *stack)
 {
 	t_list	*tmp;
 
+	printf("p: ");
 	tmp = stack->top;
 	while (tmp)
 	{
