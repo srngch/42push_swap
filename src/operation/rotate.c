@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 16:10:36 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/02 21:39:28 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 04:23:54 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int ra(t_ps *ps)
 
 int rb(t_ps *ps)
 {
-	if (ps->b->size < 2)
+	if (ps_rotate(ps->b))
 	{
 		ft_putstr_fd("rb\n", STDOUT_FILENO);
-		return (FT_FALSE);
+		return (FT_TRUE);
 	}
-	ps_rotate(ps->b);
-	return (FT_TRUE);
+	return (FT_FALSE);
 }
 
 int rr(t_ps *ps)

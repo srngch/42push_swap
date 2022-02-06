@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:41:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/04 02:24:35 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 17:38:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,37 +69,99 @@ void	a_to_b(t_ps *ps)
 	int		count;
 	int		b_size;
 	t_list	*tmp;
-	t_list	*max_now;
+	t_list	*b_max;
 
 	count = 0;
 	b_size = ps->b->size;
 	tmp = ps->b->top;
-	printf("tmp1: %d\n", *(int *)ps->b->top->content);
-	max_now = find_max_item(ps->b);
-	printf("tmp2: %d\n", *(int *)ps->b->top->content);
+	// printf("tmp: %d\n", *(int *)ps->b->top->content);
+	b_max = find_max_item(ps->b);
+	// printf("max: %d\n", *(int *)b_max->content);
 	if (b_size > 1)
 	{
-		while (tmp && tmp > ps->a->top)
+		if (*(int *)b_max->content > *(int *)ps->a->top->content)
 		{
-			count++;
-			tmp = tmp->next;
-			if (tmp == max_now)
-				break ;
-		}
-		if (count == 0)
-			printf("0\n");
-		else if (count <= b_size / 2)
-		{
-			while (count--)
-				rb(ps);
+			if (
+				((*(int *)stack_bottom(ps->b)->content) >
+					(*(int *)ps->a->top->content))
+				&& ((*(int *)stack_top(ps->b)->content) <
+					(*(int *)ps->a->top->content))
+			)
+			{
+				// printf("case1\n");
+			}
+			else
+			{
+				// printf("case2\n");
+				while (tmp)
+				{
+					// printf("%d < %d == %d | ", *(int *)tmp->content, *(int *)ps->a->top->content, *(int *)tmp->content < *(int *)ps->a->top->content);
+					count++;
+					if ((*(int *)tmp->content > *(int *)ps->a->top->content && (tmp->next && *(int *)tmp->next->content <  *(int *)ps->a->top->content)))
+					{
+						// printf("\nbreak 1\n");
+						break;
+					}
+					if (*(int *)tmp->content > *(int *)ps->a->top->content && tmp->next == b_max)
+					{
+						// printf("\nbreak 2\n");
+						break;
+					}
+					tmp = tmp->next;
+				}
+				// printf("\n");
+				if (count <= b_size / 2)
+				{
+					// printf("1. count: %d\n", count);
+					// count++;
+					while (count-- > 0)
+					{
+						// printf("do rb\n");
+						rb(ps);
+					}
+				}
+				else
+				{
+					// printf("2. count: %d\n", count);
+					count = b_size - count;
+					while (count-- > 0)
+					{
+						rrb(ps);
+					}
+				}
+			}
 		}
 		else
 		{
-			while (b_size - count-- > 0)
+			if (*(int *)b_max->content == *(int *)ps->a->top->content)
 			{
-				rrb(ps);
+				// printf("3\n");
 			}
-			rrb(ps);
+			else
+			{
+				while (tmp && tmp != b_max)
+				{
+					count++;
+					tmp = tmp->next;
+				}
+				if (count + 1 <= b_size / 2)
+				{
+					// printf("3. count: %d\n", count);
+					while (count-- > 0)
+					{
+						rb(ps);
+					}
+				}
+				else
+				{
+					count = b_size - count;
+					// printf("4. count: %d\n", count);
+					while (count-- > 0)
+					{
+						rrb(ps);
+					}
+				}
+			}
 		}
 	}
 	pb(ps);
@@ -114,22 +176,26 @@ int	ps_sort_many (t_ps *ps)
 	a_stack_max_value = *(int *)(find_max_item(ps->a)->content);
 	pb(ps);
 	a_size = ps->a->size;
-	printf(".stack_a: ");
-	print_stack(ps->a);
-	printf(".stack_b: ");
-	print_stack(ps->b);
-	printf("a_stack_max_value: %d\n", a_stack_max_value);
+	// printf(".stack_a: ");
+	// print_stack(ps->a);
+	// printf(".stack_b: ");
+	// print_stack(ps->b);
+	// printf("a_stack_max_value: %d\n", a_stack_max_value);
 	while (a_size--)
 	{
-		printf("------\n");
+		// printf("------\n");
 		a_to_b(ps);
-		printf("stack_a: ");
-		print_stack(ps->a);
-		printf("stack_b: ");
-		print_stack(ps->b);
+		// printf("stack_a: ");
+		// print_stack(ps->a);
+		// printf("stack_b: ");
+		// print_stack(ps->b);
+	}
+	while (*(int *)ps->b->top->content != a_stack_max_value)
+	{
+		rrb(ps);
 	}
 	b_size = ps->b->size;
-	printf("a_to_b done\n");
+	// printf("a_to_b done\n");
 	while (b_size--)
 	{
 		pa(ps);

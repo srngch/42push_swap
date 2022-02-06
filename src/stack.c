@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/04 02:30:13 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/05 21:53:14 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,8 @@ int	stack_push(t_stack *stack, int data)
 		stack->size++;
 		return (FT_TRUE);
 	}
-	printf("*stack->top: %d\n", *(int *)(stack->top->content));
 	item->next = stack->top;
 	stack->top = item;
-	printf("	stack->top: %d\n", *(int *)(stack->top->content));
 	stack->size++;
 	return (FT_TRUE);
 }

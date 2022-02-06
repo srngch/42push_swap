@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:56:49 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/04 02:13:36 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/05 21:53:47 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int pb(t_ps *ps)
 {
 	if (ps_push(ps->a, ps->b))
 	{
-		printf("pb print:");
-		print_stack(ps->b);
 		ft_putstr_fd("pb\n", STDOUT_FILENO);
 		return (FT_TRUE);
 	}

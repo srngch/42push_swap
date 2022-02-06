@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:18:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/04 01:22:37 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 17:38:33 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,15 @@ int	main(int argc, char **argv)
 		free_stack(ps.a);
 		return (EXIT_FAILURE);
 	}
-	print_stack(ps.a);
-	printf("stack size: %d\n", ps.a->size);
+	// print_stack(ps.a);
+	// printf("stack size: %d\n", ps.a->size);
 	ps.b = init_stack();
+	// pb(&ps);
+	// pb(&ps);
+	// pb(&ps);
 	ps_sort(&ps);
-	print_stack(ps.a);
+	// print_stack(ps.a);
+	// print_stack(ps.b);
 	// TODO: sort the stacks
 	// TODO: print the result
 	// TODO: free the stacks
