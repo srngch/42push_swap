@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:41:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/06 17:38:27 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/07 01:17:14 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,29 @@ int	ps_sort_4 (t_ps *ps)
 	return (FT_TRUE);
 }
 
+void	rotate_stack_b(t_ps *ps, int count)
+{
+	int	b_size;
+
+	b_size = ps->b->size;
+	if (count <= b_size / 2)
+	{
+		while (count--)
+			rb(ps);
+	}
+	else
+	{
+		b_size = b_size - count;
+		while (b_size--)
+			rrb(ps);
+	}
+}
+
+static int	get_value(t_list *item)
+{
+	return (*(int *)item->content);
+}
+
 void	a_to_b(t_ps *ps)
 {
 	int		count;
@@ -73,95 +96,47 @@ void	a_to_b(t_ps *ps)
 
 	count = 0;
 	b_size = ps->b->size;
-	tmp = ps->b->top;
-	// printf("tmp: %d\n", *(int *)ps->b->top->content);
+	tmp = stack_top(ps->b);
 	b_max = find_max_item(ps->b);
-	// printf("max: %d\n", *(int *)b_max->content);
+
 	if (b_size > 1)
 	{
-		if (*(int *)b_max->content > *(int *)ps->a->top->content)
+		if (get_value(stack_top(ps->a)) < get_value(b_max)) // 가장 큰 값이 b에 있음
 		{
-			if (
-				((*(int *)stack_bottom(ps->b)->content) >
-					(*(int *)ps->a->top->content))
-				&& ((*(int *)stack_top(ps->b)->content) <
-					(*(int *)ps->a->top->content))
-			)
+			while (tmp)
 			{
-				// printf("case1\n");
+				if (
+					get_value(stack_top(ps->b)) < get_value(stack_top(ps->a)) && \
+					get_value(stack_top(ps->a)) < get_value(stack_bottom(ps->b))
+				)
+					break;
+				count++;
+				if (
+					// b.tmp.next < a.top < b.tmp
+					get_value(stack_top(ps->a)) < get_value(tmp) && \
+					tmp->next && get_value(tmp->next) < get_value(stack_top(ps->a))
+				)
+					break;
+				if (
+					// a.top < b.tmp && b.tmp.next == b.max
+					get_value(stack_top(ps->a)) < get_value(tmp) &&
+					tmp->next == b_max
+				)
+					break;
+				tmp = tmp->next;
 			}
-			else
-			{
-				// printf("case2\n");
-				while (tmp)
-				{
-					// printf("%d < %d == %d | ", *(int *)tmp->content, *(int *)ps->a->top->content, *(int *)tmp->content < *(int *)ps->a->top->content);
-					count++;
-					if ((*(int *)tmp->content > *(int *)ps->a->top->content && (tmp->next && *(int *)tmp->next->content <  *(int *)ps->a->top->content)))
-					{
-						// printf("\nbreak 1\n");
-						break;
-					}
-					if (*(int *)tmp->content > *(int *)ps->a->top->content && tmp->next == b_max)
-					{
-						// printf("\nbreak 2\n");
-						break;
-					}
-					tmp = tmp->next;
-				}
-				// printf("\n");
-				if (count <= b_size / 2)
-				{
-					// printf("1. count: %d\n", count);
-					// count++;
-					while (count-- > 0)
-					{
-						// printf("do rb\n");
-						rb(ps);
-					}
-				}
-				else
-				{
-					// printf("2. count: %d\n", count);
-					count = b_size - count;
-					while (count-- > 0)
-					{
-						rrb(ps);
-					}
-				}
-			}
+			rotate_stack_b(ps, count);
 		}
 		else
 		{
-			if (*(int *)b_max->content == *(int *)ps->a->top->content)
+			while (tmp)
 			{
-				// printf("3\n");
+				count++;
+				if (tmp->next == b_max)
+					break;
+				tmp = tmp->next;
 			}
-			else
-			{
-				while (tmp && tmp != b_max)
-				{
-					count++;
-					tmp = tmp->next;
-				}
-				if (count + 1 <= b_size / 2)
-				{
-					// printf("3. count: %d\n", count);
-					while (count-- > 0)
-					{
-						rb(ps);
-					}
-				}
-				else
-				{
-					count = b_size - count;
-					// printf("4. count: %d\n", count);
-					while (count-- > 0)
-					{
-						rrb(ps);
-					}
-				}
-			}
+			rotate_stack_b(ps, count);
 		}
 	}
 	pb(ps);
@@ -184,6 +159,13 @@ int	ps_sort_many (t_ps *ps)
 	while (a_size--)
 	{
 		// printf("------\n");
+		// printf("b_top: %d\n", *(int *)ps->b->top->content);
+		while (((*(int *)ps->b->top->content - (a_size / 15) < *(int *)ps->a->top->content) && \
+		(*(int *)ps->a->top->content) < *(int *)ps->b->top->content + (a_size / 15)))
+		{
+			// printf("a_top: %d\n", *(int *)ps->a->top->content);
+			ra(ps);
+		}
 		a_to_b(ps);
 		// printf("stack_a: ");
 		// print_stack(ps->a);

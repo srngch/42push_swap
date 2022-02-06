@@ -6,13 +6,12 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:18:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/06 17:38:33 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/06 23:43:27 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// WIP
 int	ps_sort(t_ps *ps)
 {
 	if (ps->a->size == 1)
@@ -21,13 +20,8 @@ int	ps_sort(t_ps *ps)
 		return (ps_sort_2(ps));
 	if (ps->a->size == 3)
 		return (ps_sort_3(ps));
-	// if (ps->a->size == 4)
-	// 	return (ps_sort_4(ps));
 	else
-	{
 		return (ps_sort_many(ps));
-		ft_putstr_fd("4 or more elements\n", 1);
-	}
 	return (FT_FALSE);
 }
 
@@ -51,14 +45,9 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	// print_stack(ps.a);
-	// printf("stack size: %d\n", ps.a->size);
 	ps.b = init_stack();
-	// pb(&ps);
-	// pb(&ps);
-	// pb(&ps);
 	ps_sort(&ps);
 	// print_stack(ps.a);
-	// print_stack(ps.b);
 	// TODO: sort the stacks
 	// TODO: print the result
 	// TODO: free the stacks
