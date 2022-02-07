@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:20:47 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/04 01:21:54 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/07 21:23:21 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ int		rrr(t_ps *ps);
 
 t_list	*find_min_item(t_stack *stack);
 t_list	*find_max_item(t_stack *stack);
+int			get_nth_value(t_stack *stack, int n);
+
+int	count_meet_first_under(t_stack *stack, int under);
+int	count_meet_last_under(t_stack *stack, int under);
 
 int		ps_sort_2 (t_ps *ps);
 int		ps_sort_3 (t_ps *ps);

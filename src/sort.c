@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:41:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/07 01:17:14 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/08 02:03:18 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,60 @@ int	ps_sort_4 (t_ps *ps)
 	return (FT_TRUE);
 }
 
+int	ps_sort_5(t_ps *ps)
+{
+	t_list	*min;
+	t_list	*max;
+
+	min = find_min_item(ps->a);
+	max = find_max_item(ps->a);
+	if (stack_top(ps->a) == max)
+		ra(ps);
+	pb(ps);
+	ps_sort_3(ps);
+	while (*(int *)stack_top(ps->a) > *(int *)stack_top(ps->b))
+		rra(ps);
+	pa(ps);
+	while (ps->a->top != min)
+		rra(ps);
+	return (FT_TRUE);
+}
+
+void	rotate_stack_a(t_ps *ps, int count)
+{
+	int	stack_size;
+
+	stack_size = ps->a->size;
+	// printf("count: %d, stack_size / 2: %d ", count, stack_size / 2);
+	if (count <= stack_size / 2)
+	{
+		// printf("🤟\n");
+		while (count--)
+			ra(ps);
+	}
+	else
+	{
+		// printf("🎒\n");
+		stack_size = stack_size - count;
+		while (stack_size--)
+			rra(ps);
+	}
+}
+
 void	rotate_stack_b(t_ps *ps, int count)
 {
-	int	b_size;
+	int	stack_size;
 
-	b_size = ps->b->size;
-	if (count <= b_size / 2)
+	stack_size = ps->b->size;
+	if (count <= stack_size / 2)
 	{
 		while (count--)
 			rb(ps);
 	}
 	else
 	{
-		b_size = b_size - count;
-		while (b_size--)
+		stack_size = stack_size - count;
+		while (stack_size--)
 			rrb(ps);
 	}
 }
@@ -90,97 +130,81 @@ static int	get_value(t_list *item)
 void	a_to_b(t_ps *ps)
 {
 	int		count;
-	int		b_size;
 	t_list	*tmp;
 	t_list	*b_max;
 
 	count = 0;
-	b_size = ps->b->size;
 	tmp = stack_top(ps->b);
 	b_max = find_max_item(ps->b);
 
-	if (b_size > 1)
+	while (tmp)
 	{
-		if (get_value(stack_top(ps->a)) < get_value(b_max)) // 가장 큰 값이 b에 있음
-		{
-			while (tmp)
-			{
-				if (
-					get_value(stack_top(ps->b)) < get_value(stack_top(ps->a)) && \
-					get_value(stack_top(ps->a)) < get_value(stack_bottom(ps->b))
-				)
-					break;
-				count++;
-				if (
-					// b.tmp.next < a.top < b.tmp
-					get_value(stack_top(ps->a)) < get_value(tmp) && \
-					tmp->next && get_value(tmp->next) < get_value(stack_top(ps->a))
-				)
-					break;
-				if (
-					// a.top < b.tmp && b.tmp.next == b.max
-					get_value(stack_top(ps->a)) < get_value(tmp) &&
-					tmp->next == b_max
-				)
-					break;
-				tmp = tmp->next;
-			}
-			rotate_stack_b(ps, count);
-		}
-		else
-		{
-			while (tmp)
-			{
-				count++;
-				if (tmp->next == b_max)
-					break;
-				tmp = tmp->next;
-			}
-			rotate_stack_b(ps, count);
-		}
+		if (
+			get_value(stack_top(ps->b)) < get_value(stack_top(ps->a)) && \
+			get_value(stack_top(ps->a)) < get_value(stack_bottom(ps->b))
+		)
+			break;
+		count++;
+		if (
+			get_value(stack_top(ps->a)) > get_value(b_max) && \
+			tmp->next == b_max
+		)
+			break;
+		if (
+			// b.tmp.next < a.top < b.tmp
+			get_value(stack_top(ps->a)) < get_value(tmp) && \
+			tmp->next && get_value(tmp->next) < get_value(stack_top(ps->a))
+		)
+			break;
+		if (
+			// a.top < b.tmp && b.tmp.next == b.max
+			get_value(stack_top(ps->a)) < get_value(tmp) &&
+			tmp->next == b_max
+		)
+			break;
+		tmp = tmp->next;
 	}
-	pb(ps);
+	rotate_stack_b(ps, count);
 }
 
 int	ps_sort_many (t_ps *ps)
 {
 	int	a_size;
 	int	b_size;
-	int	a_stack_max_value;
+	int	list_min_value;
+	int	list_max_value;
+	int	i;
+	int tmp;
 
-	a_stack_max_value = *(int *)(find_max_item(ps->a)->content);
+	list_min_value = get_value(find_min_item(ps->a));
+	list_max_value = get_value(find_max_item(ps->a));
 	pb(ps);
 	a_size = ps->a->size;
-	// printf(".stack_a: ");
-	// print_stack(ps->a);
-	// printf(".stack_b: ");
-	// print_stack(ps->b);
-	// printf("a_stack_max_value: %d\n", a_stack_max_value);
+	i = 20;
 	while (a_size--)
 	{
-		// printf("------\n");
-		// printf("b_top: %d\n", *(int *)ps->b->top->content);
-		while (((*(int *)ps->b->top->content - (a_size / 15) < *(int *)ps->a->top->content) && \
-		(*(int *)ps->a->top->content) < *(int *)ps->b->top->content + (a_size / 15)))
+		tmp = get_nth_value(ps->a, i);
+		if (get_value(ps->a->top) > tmp)
 		{
-			// printf("a_top: %d\n", *(int *)ps->a->top->content);
-			ra(ps);
+			if (count_meet_first_under(ps->a, tmp) <= a_size - count_meet_last_under(ps->a, tmp))
+				rotate_stack_a(ps, count_meet_first_under(ps->a, tmp));
+			else
+				rotate_stack_a(ps, count_meet_last_under(ps->a, tmp));
 		}
-		a_to_b(ps);
-		// printf("stack_a: ");
-		// print_stack(ps->a);
-		// printf("stack_b: ");
-		// print_stack(ps->b);
-	}
-	while (*(int *)ps->b->top->content != a_stack_max_value)
-	{
-		rrb(ps);
+
+		if (ps->b->size > 1)
+			a_to_b(ps);
+		pb(ps);
+		i--;
+		if (i == 0)
+			i = 20;
 	}
 	b_size = ps->b->size;
-	// printf("a_to_b done\n");
 	while (b_size--)
 	{
 		pa(ps);
 	}
+	while (get_value(ps->a->top) != list_min_value)
+		ra(ps);
 	return (FT_TRUE);
 }

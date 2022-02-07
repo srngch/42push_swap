@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:29:21 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/06 23:07:00 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/08 01:06:15 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,35 +53,87 @@ t_list	*find_max_item(t_stack *stack)
 	return (max);
 }
 
-int	find_median_value(t_stack *stack)
+static int	find_min_value_with_limit(t_stack *stack, int upper)
 {
 	t_list	*tmp;
-	t_list	*median;
-	int		min_value;
-	int		max_value;
-	int		diff_to_min;
-	int		diff_to_max;
+	int			min;
 
-	min_value = *(int *)find_min_item(stack)->content;
-	max_value = *(int *)find_max_item(stack)->content;
 	tmp = stack->top;
-	median = tmp;
-	diff_to_min = *(int *)median->content - min_value;
-	diff_to_max = max_value - *(int *)median->content;
-	printf("min_value: %d, max_value: %d\n", min_value, max_value);
-	printf("diff_to_min: %d, diff_to_max: %d\n", diff_to_min, diff_to_max);
+	min = *(int *)find_max_item(stack)->content;
 	while (tmp)
 	{
-		printf("[%d] diff_to_min: %d, diff_to_max: %d\n", *(int *)tmp->content, *(int *)tmp->content - min_value, max_value - *(int *)tmp->content);
-		if ((diff_to_min < *(int *)tmp->content - min_value) && \
-			(diff_to_max < max_value - *(int *)tmp->content))
+		if (*(int *)tmp->content > upper)
 		{
-			median = tmp;
-			diff_to_min = *(int *)median->content - min_value;
-			diff_to_max = max_value - *(int *)median->content;
-			printf("!\n");
+			if (*(int *)tmp->content < min)
+				min = *(int *)tmp->content;
 		}
 		tmp = tmp->next;
 	}
-	return (*(int *)median->content);
+	return (min);
+}
+
+int	get_nth_value(t_stack *stack, int n)
+{
+	int	i;
+	int	result;
+
+	result = *(int *)find_min_item(stack)->content;
+	i = 0;
+	while (++i <= n)
+		result = find_min_value_with_limit(stack, result);
+	return (result);
+}
+
+// find value that is closest to target
+int	count_meet_first_under(t_stack *stack, int under)
+{
+	t_list	*tmp;
+	int			count;
+
+	tmp = stack->top;
+	count = 0;
+	while (tmp)
+	{
+		if (*(int *)tmp->content < under)
+			break ;
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+int	count_meet_last_under(t_stack *stack, int under)
+{
+	t_list	*tmp;
+	int		i;
+	int		count;
+	int		value;
+
+	tmp = stack->top;
+	i = 0;
+	while (tmp)
+	{
+		if (*(int *)tmp->content < under)
+		{
+			value = *(int *)tmp->content;
+			count = i;
+		}
+		i++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+int	has_under(t_stack *stack, int under)
+{
+	t_list	*tmp;
+
+	tmp = stack->top;
+	while (tmp)
+	{
+		if (*(int *)tmp->content < under)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
