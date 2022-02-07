@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:41:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/08 02:03:18 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/08 03:07:23 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ps_sort_3 (t_ps *ps)
 
 	min_item = find_min_item(ps->a);
 	max_item = find_max_item(ps->a);
-	// printf("min: %d, max: %d\n", *(int *)min_item->content, *(int *)max_item->content);
 	if (stack_top(ps->a) == min_item && stack_bottom(ps->a) == max_item)
 		return (FT_TRUE);
 	if (stack_top(ps->a) == min_item && stack_bottom(ps->a) != max_item)
@@ -88,16 +87,13 @@ void	rotate_stack_a(t_ps *ps, int count)
 	int	stack_size;
 
 	stack_size = ps->a->size;
-	// printf("count: %d, stack_size / 2: %d ", count, stack_size / 2);
 	if (count <= stack_size / 2)
 	{
-		// printf("🤟\n");
 		while (count--)
 			ra(ps);
 	}
 	else
 	{
-		// printf("🎒\n");
 		stack_size = stack_size - count;
 		while (stack_size--)
 			rra(ps);
@@ -143,25 +139,25 @@ void	a_to_b(t_ps *ps)
 			get_value(stack_top(ps->b)) < get_value(stack_top(ps->a)) && \
 			get_value(stack_top(ps->a)) < get_value(stack_bottom(ps->b))
 		)
-			break;
+			break ;
 		count++;
 		if (
 			get_value(stack_top(ps->a)) > get_value(b_max) && \
 			tmp->next == b_max
 		)
-			break;
+			break ;
 		if (
 			// b.tmp.next < a.top < b.tmp
 			get_value(stack_top(ps->a)) < get_value(tmp) && \
 			tmp->next && get_value(tmp->next) < get_value(stack_top(ps->a))
 		)
-			break;
+			break ;
 		if (
 			// a.top < b.tmp && b.tmp.next == b.max
 			get_value(stack_top(ps->a)) < get_value(tmp) &&
 			tmp->next == b_max
 		)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
 	rotate_stack_b(ps, count);
@@ -175,12 +171,13 @@ int	ps_sort_many (t_ps *ps)
 	int	list_max_value;
 	int	i;
 	int tmp;
+	int	range = 13;
 
 	list_min_value = get_value(find_min_item(ps->a));
 	list_max_value = get_value(find_max_item(ps->a));
 	pb(ps);
 	a_size = ps->a->size;
-	i = 20;
+	i = range;
 	while (a_size--)
 	{
 		tmp = get_nth_value(ps->a, i);
@@ -191,13 +188,12 @@ int	ps_sort_many (t_ps *ps)
 			else
 				rotate_stack_a(ps, count_meet_last_under(ps->a, tmp));
 		}
-
 		if (ps->b->size > 1)
 			a_to_b(ps);
 		pb(ps);
 		i--;
 		if (i == 0)
-			i = 20;
+			i = range;
 	}
 	b_size = ps->b->size;
 	while (b_size--)

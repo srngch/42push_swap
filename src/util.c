@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:29:21 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/08 01:06:15 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/08 03:07:46 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	get_nth_value(t_stack *stack, int n)
 	return (result);
 }
 
-// find value that is closest to target
 int	count_meet_first_under(t_stack *stack, int under)
 {
 	t_list	*tmp;
