@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 16:22:26 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 01:55:38 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 02:34:10 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int	stack_pop(t_stack *stack)
 	{
 		stack->top = NULL;
 		stack->size = 0;
+		free(item->content);
 		free(item);
 		return (data);
 	}
 	stack->top = item->next;
+	free(item->content);
 	free(item);
 	stack->size--;
 	return (data);

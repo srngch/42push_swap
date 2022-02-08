@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:56:49 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/05 21:53:47 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 02:32:52 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ps_push(t_stack *stack_from, t_stack *stack_to)
 	if (!stack_from->top)
 		return (FT_FALSE);
 	content = stack_pop(stack_from);
+	content = 1;
 	stack_push(stack_to, content);
 	return (FT_TRUE);
 }
