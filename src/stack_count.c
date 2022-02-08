@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 00:54:50 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 01:48:14 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 02:44:44 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_nth_value(t_stack *stack, int n)
 int	count_meet_first_under(t_stack *stack, int under)
 {
 	t_list	*tmp;
-	int			count;
+	int		count;
 
 	tmp = stack->top;
 	count = 0;
