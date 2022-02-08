@@ -6,7 +6,7 @@
 #    By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/15 13:55:37 by sarchoi           #+#    #+#              #
-#    Updated: 2022/02/09 02:13:13 by sarchoi          ###   ########seoul.kr   #
+#    Updated: 2022/02/09 02:49:10 by sarchoi          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	@make all --silent --directory=$(LIBFT)
 	@make all --silent --directory=$(LIBFT)
-	$(info $(green)<MAKE> Libft - make bonus$(reset))
+	$(info $(green)<MAKE> make Libft$(reset))
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS_SERVER) $(OBJS) $(LIBFT_FLAGS)
