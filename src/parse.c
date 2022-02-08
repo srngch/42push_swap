@@ -6,24 +6,11 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 01:22:19 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 02:51:33 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 00:32:39 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	free_split(char **nums)
-{
-	int	i;
-
-	i = 0;
-	while (nums[i])
-	{
-		free(nums[i]);
-		i++;
-	}
-	free(nums);
-}
 
 static unsigned int	get_split_length(char **nums)
 {
@@ -33,6 +20,19 @@ static unsigned int	get_split_length(char **nums)
 	while (nums[i])
 		i++;
 	return (i);
+}
+
+static void	free_split(char **nums)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (nums[i])
+	{
+		free(nums[i]);
+		i++;
+	}
+	free(nums);
 }
 
 int	parse_arguments(t_stack	**stack, int argv_length, char **argv)

@@ -1,18 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ps_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 11:57:12 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/05/05 13:19:49 by sarchoi          ###   ########.fr       */
+/*   Created: 2022/01/23 01:18:08 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/02/09 00:39:09 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "push_swap.h"
+
+static int	is_space(int c)
 {
-	if (0 <= c && c <= 127)
+	if (c == ' ' || (9 <= c && c <= 13))
 		return (1);
 	return (0);
+}
+
+long	ps_atol(const char *str)
+{
+	long	r;
+	int		sign;
+
+	r = 0;
+	sign = 1;
+	while (is_space(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		r = r * 10 + (*str - '0');
+		str++;
+	}
+	return (r * sign);
 }

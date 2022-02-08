@@ -1,19 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   util_stack_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 20:24:53 by sarchoi           #+#    #+#             */
-/*   Updated: 2021/05/05 20:25:25 by sarchoi          ###   ########.fr       */
+/*   Created: 2022/02/09 00:36:09 by sarchoi           #+#    #+#             */
+/*   Updated: 2022/02/09 00:59:59 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_putendl_fd(char *s, int fd)
+t_stack	*init_stack(void)
 {
-	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
+	t_stack	*stack;
+
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
+	stack->top = NULL;
+	stack->size = 0;
+	return (stack);
+}
+
+void	free_stack(t_stack *stack)
+{
+	t_list	*item;
+	t_list	*next;
+
+	item = stack->top;
+	while (item)
+	{
+		next = item->next;
+		free(item->content);
+		free(item);
+		item = next;
+	}
+	free(stack);
 }

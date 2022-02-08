@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 11:56:54 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 02:53:44 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 02:09:58 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			ft_atoi(const char *str)
 	}
 	while (ft_isdigit(*str))
 	{
-		// TODO: remove if statement
 		if (((int)r * sign) > 469762049)
 			return (-1);
 		else if (((int)r * sign) < -469762049)
