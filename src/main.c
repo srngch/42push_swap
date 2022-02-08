@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:18:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 02:25:22 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 03:05:38 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,5 @@ int	main(int argc, char **argv)
 	ps_sort(&ps);
 	free_stack(ps.a);
 	free_stack(ps.b);
-	while (1)
-		;
 	return (EXIT_SUCCESS);
 }
