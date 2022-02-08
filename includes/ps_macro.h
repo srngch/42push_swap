@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:25:30 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/01/23 00:45:50 by sarchoi          ###   ########.fr       */
+/*   Updated: 2022/02/09 02:48:07 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@
 # define PS_INT_MIN -2147483648
 # define PS_INT_MAX 2147483647
 
-/*
-** ANSI Color Codes
-*/
-# define RED			"\x1b[31m"
-# define GREEN			"\x1b[32m"
-# define BLUE			"\x1b[34m"
-# define YELLOW			"\x1b[33m"
-# define MAGENTA		"\x1b[35m"
-# define CYAN			"\x1b[36m"
-# define RESET			"\x1b[0m"
+# define PS_SORT_RANGE	13
 
 #endif

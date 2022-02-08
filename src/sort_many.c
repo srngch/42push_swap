@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 00:46:50 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 02:41:10 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 02:57:06 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,13 @@ int	ps_sort_many (t_ps *ps)
 	int	a_size;
 	int	b_size;
 	int	list_min_value;
-	int	list_max_value;
 	int	i;
 	int tmp;
-	int	range = 13;
 
 	list_min_value = item_value(find_min_item(ps->a));
-	list_max_value = item_value(find_max_item(ps->a));
 	pb(ps);
 	a_size = ps->a->size;
-	i = range;
+	i = PS_SORT_RANGE;
 	while (a_size--)
 	{
 		tmp = get_nth_value(ps->a, i);
@@ -84,7 +81,7 @@ int	ps_sort_many (t_ps *ps)
 		pb(ps);
 		i--;
 		if (i == 0)
-			i = range;
+			i = PS_SORT_RANGE;
 	}
 	b_size = ps->b->size;
 	while (b_size--)
