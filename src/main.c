@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:18:42 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 03:05:38 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 14:56:49 by sarchoi          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,9 @@ static int	ps_sort(t_ps *ps)
 int	ps_parse(t_stack *stack, int argc, char **argv)
 {
 	if (!parse_arguments(&stack, argc - 1, argv + 1))
-	{
-		ft_putstr_fd("Error: parse\n", STDOUT_FILENO);
-		free_stack(stack);
 		return (FT_FALSE);
-	}
 	if (!check_duplicates(stack))
-	{
-		ft_putstr_fd("Error: duplicates\n", STDOUT_FILENO);
-		free_stack(stack);
 		return (FT_FALSE);
-	}
 	return (FT_TRUE);
 }
 
@@ -82,7 +74,11 @@ int	main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	ps.a = init_stack();
 	if (!ps_parse(ps.a, argc, argv))
+	{
+		ft_putstr_fd("Error\n", STDOUT_FILENO);
+		free_stack(ps.a);
 		return (EXIT_FAILURE);
+	}
 	if (check_stack_sorted(ps.a))
 	{
 		free_stack(ps.a);
