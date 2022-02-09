@@ -6,7 +6,7 @@
 /*   By: sarchoi <sarchoi@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:20:47 by sarchoi           #+#    #+#             */
-/*   Updated: 2022/02/09 02:41:36 by sarchoi          ###   ########seoul.kr  */
+/*   Updated: 2022/02/09 15:09:56 by sarchoi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			ps_sort_2(t_ps *ps);
 int			ps_sort_3(t_ps *ps);
 int			ps_sort_4(t_ps *ps);
 int			ps_sort_5(t_ps *ps);
-int			ps_sort_many (t_ps *ps);
+int			ps_sort_many(t_ps *ps);
 
 /*
 * util_*.c
