@@ -65,7 +65,7 @@ Developed and tested in this environment.
 ### Mandatory
 
 ```shell
-$ git clone https://github.com/srngch/42minitalk
+$ git clone https://github.com/srngch/42push_swap
 $ make
 ```
 
